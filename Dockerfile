@@ -11,14 +11,14 @@ RUN useradd -m -s /bin/bash ubuntuuser && \
     echo 'ubuntuuser:password123' | chpasswd && \
     usermod -aG sudo ubuntuuser
 
-# Configure SSH to use port 10022
-RUN sed -i 's/^#Port 22/Port 10022/' /etc/ssh/sshd_config
+# Configure SSH to listen on port 10000
+RUN sed -i 's/^#Port 22/Port 10000/' /etc/ssh/sshd_config
 
 # Ensure the SSH directory exists
 RUN mkdir -p /run/sshd
 
-# Expose port 10022
-EXPOSE 10022
+# Expose port 10000
+EXPOSE 10000
 
 # Start SSH service
 CMD ["/usr/sbin/sshd", "-D"]
